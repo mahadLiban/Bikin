@@ -60,6 +60,8 @@ class FooterController extends Controller
      */
     public function edit(Footer $footer)
     {
+        $this->authorize("footer-edit", Footer::class);
+
         return view("backoffice.footer.edit", compact("footer"));
 
     }
@@ -73,6 +75,8 @@ class FooterController extends Controller
      */
     public function update(Request $request, Footer $footer)
     {
+        $this->authorize("update", $footer);
+
         
         $footer->footerTitre1 = $request->footerTitre1;
         $footer->footerTitre2 = $request->footerTitre2;
@@ -110,6 +114,8 @@ class FooterController extends Controller
      */
     public function destroy(Footer $footer)
     {
+        $this->authorize("delete", $footer);
+
         $footer->delete();
         return redirect()->back();
 

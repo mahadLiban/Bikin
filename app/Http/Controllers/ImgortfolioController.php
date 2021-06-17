@@ -30,6 +30,7 @@ class imgortfolioController extends Controller
     {
         $imgortfolio= imgortfolio::all();
         $filtres = Filtre::all();
+        $this->authorize("imgortfolio-create", imgortfolio::class);
 
 
         return view("backoffice.imgortfolio.create",compact("imgortfolio", 'filtres'));
@@ -43,6 +44,8 @@ class imgortfolioController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize("update", imgortfolio::class);
+
         $request->validate([
             "img"=>"required",
             
@@ -81,6 +84,8 @@ class imgortfolioController extends Controller
     
     {
         $filtres = Filtre::all();
+        $this->authorize("imgortfolio-edit", imgortfolio::class);
+
         return view("backoffice.imgortfolio.edit", compact("imgortfolio", "filtres"));
 
     }
@@ -94,6 +99,8 @@ class imgortfolioController extends Controller
      */
     public function update(Request $request, imgortfolio $imgortfolio)
     {
+        $this->authorize("update", imgortfolio::class);
+
         $request->validate([
             "img"=>"required",
         ]);
@@ -116,6 +123,8 @@ class imgortfolioController extends Controller
      */
     public function destroy(imgortfolio $imgortfolio)
     {
+        $this->authorize("delete", $imgortfolio);
+
         $imgortfolio->delete();
         return redirect()->back();
 

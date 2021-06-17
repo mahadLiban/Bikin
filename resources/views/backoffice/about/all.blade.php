@@ -4,7 +4,7 @@
 
 
     <div class="d-flex align-items-center justify-content-center mb-5">
-        <h1 class="my-0 mx-2">abouts</h1>
+        <h1 class="my-0 mx-2">abouts</h1>         
     </div>
     <table class="table">
         <thead>
@@ -30,8 +30,9 @@
                     <td>
                         <div class="d-flex">
                             <a class="btn btn-warning text-white mx-2" href="/abouts/{{ $about->id }}"><i class="fas fa-eye"></i></a>
-                                
-                            <a class="btn btn-success text-white mx-2" href="/abouts/{{ $about->id }}/edit"><i class="fas fa-edit"></i></a>
+                                @can('delete', $about)           
+                                <a class="btn btn-success text-white mx-2" href="/abouts/{{ $about->id }}/edit"><i class="fas fa-edit"></i></a>
+                                @endcan
                                
                         </div>
                     </td>

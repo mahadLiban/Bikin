@@ -17,6 +17,12 @@
           <li>
             <a href={{ route('dashboard') }} class="getstarted scrollto">Backoffice</a>
           </li>
+          
+          
+          <li><form method="POST"  action="{{ route('logout') }}">
+            <button type="submit">Log Out</button>
+            @csrf
+          </form></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->

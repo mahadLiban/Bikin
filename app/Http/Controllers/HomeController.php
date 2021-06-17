@@ -72,7 +72,9 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Home $home)
+    
     {
+        $this->authorize("home-edit", Home::class);
         return view("backoffice.home.edit", compact("home"));
 
     }
@@ -86,6 +88,8 @@ class HomeController extends Controller
      */
     public function update(Request $request, Home $home)
     {
+        $this->authorize("update", $home);
+
         $request->validate([
             "img"=>"required"
         ]);
@@ -106,6 +110,8 @@ class HomeController extends Controller
      */
     public function destroy(Home $home)
     {
+        $this->authorize("delete", $home);
+
         $home->delete();
         return redirect()->back();
     }

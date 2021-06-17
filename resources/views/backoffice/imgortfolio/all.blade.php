@@ -26,8 +26,9 @@
                     <td>
                         <div class="d-flex">
                             <a class="btn btn-warning text-white mx-2" href="/imgortfolios/{{ $imgortfolio->id }}"><i class="fas fa-eye"></i></a>
-                                
-                            <a class="btn btn-success text-white mx-2" href="/imgortfolios/{{ $imgortfolio->id }}/edit"><i class="fas fa-edit"></i></a>
+                               @can('update', $imgortfolio) 
+                                    <a class="btn btn-success text-white mx-2" href="/imgortfolios/{{ $imgortfolio->id }}/edit"><i class="fas fa-edit"></i></a>
+                               @endcan 
                                
                         </div>
                     </td>

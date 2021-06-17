@@ -71,8 +71,9 @@
                     <td>
                         <div class="d-flex">
                             <a class="btn btn-warning text-white mx-2" href="/footers/{{ $footer->id }}"><i class="fas fa-eye"></i></a>
-                                
-                            <a class="btn btn-success text-white mx-2" href="/footers/{{ $footer->id }}/edit"><i class="fas fa-edit"></i></a>
+                                @can('update', $footer)
+                                    <a class="btn btn-success text-white mx-2" href="/footers/{{ $footer->id }}/edit"><i class="fas fa-edit"></i></a>
+                                @endcan
                                
                         </div>
                     </td>

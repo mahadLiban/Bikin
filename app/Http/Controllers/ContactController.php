@@ -60,6 +60,8 @@ class ContactController extends Controller
      */
     public function edit(Contact $contact)
     {
+        $this->authorize("contact-edit", $contact);
+
         return view("backoffice.contact.edit", compact("contact"));
 
     }
@@ -73,6 +75,8 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
+        $this->authorize("update", $contact);
+
         $request->validate([
             "logo"=>"required",
             "text"=>"required",
@@ -100,6 +104,8 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
+        $this->authorize("delete", $contact);
+
         $contact->delete();
         return redirect()->back();
     }

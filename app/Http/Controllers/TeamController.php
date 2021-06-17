@@ -27,6 +27,8 @@ class TeamController extends Controller
      */
     public function create()
     {
+        $this->authorize("team-create", Team::class);
+
         return view("backoffice.team.create");
 
     }
@@ -39,7 +41,8 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        
+        $this->authorize("update", Team::class);
+
         $request->validate([
             "icone"=>"required",
         ]);
@@ -72,6 +75,8 @@ class TeamController extends Controller
      */
     public function edit(Team $team)
     {
+        $this->authorize("team-edit", Team::class);
+
         return view("backoffice.team.edit", compact("team"));
 
     }
@@ -85,6 +90,8 @@ class TeamController extends Controller
      */
     public function update(Request $request, Team $team)
     {
+        $this->authorize("update", $team);
+
         $request->validate([
             "icone"=>"required",
            
@@ -107,6 +114,8 @@ class TeamController extends Controller
      */
     public function destroy(Team $team)
     {
+        $this->authorize("delete", $team);
+
         $team->delete();
         return redirect()->back();
 

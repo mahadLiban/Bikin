@@ -27,6 +27,8 @@ class TestimonialController extends Controller
      */
     public function create()
     {
+        $this->authorize("testimonial-create", Testimonial::class);
+
         return view("backoffice.testimonial.create");
 
     }
@@ -39,6 +41,8 @@ class TestimonialController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize("delete", Testimonial::class);
+
         $request->validate([
             "paragraphe"=>"required",
             "pdp"=>"required",
@@ -80,6 +84,8 @@ class TestimonialController extends Controller
      */
     public function edit(Testimonial $testimonial)
     {
+        $this->authorize("testimonial-edit", Testimonial::class);
+
         return view("backoffice.testimonial.edit", compact("testimonial"));
 
     }
@@ -93,6 +99,8 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, Testimonial $testimonial)
     {
+        $this->authorize("update", $testimonial);
+
         $request->validate([
             "paragraphe"=>"required",
             "pdp"=>"required",
@@ -121,6 +129,8 @@ class TestimonialController extends Controller
      */
     public function destroy(Testimonial $testimonial)
     {
+        $this->authorize("delete", $testimonial);
+
         $testimonial->delete();
         return redirect()->back();
 

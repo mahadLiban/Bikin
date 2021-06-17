@@ -2,9 +2,10 @@
 
 @section('content')
     <div class="d-flex align-items-center justify-content-center mb-5">
-        <h1 class="my-0 mx-2">filtres</h1>
-            
-        <a href={{ route('filtres.create') }} class="btn btn-success text-white"><i class="fas fa-plus"></i></a>
+        <h1 class="my-0 mx-2">Filtres</h1>
+            @can('create', \App\Models\Filtre::class)               
+            <a href={{ route('filtres.create') }} class="btn btn-success text-white"><i class="fas fa-plus"></i></a>
+            @endcan
     </div>
     <table class="table">
         <thead>
@@ -23,15 +24,18 @@
                         <div class="d-flex">
                             <a class="btn btn-warning text-white mx-2" href="/filtres/{{ $filtre->id }}"><i class="fas fa-eye"></i></a>
 
-                                
-                            <a class="btn btn-success text-white mx-2" href="/filtres/{{ $filtre->id }}/edit"><i class="fas fa-edit"></i></a>
-                                
-                            <form action={{ route('filtres.destroy', $filtre->id) }} method="post">
-                                @csrf
-                                @method("delete")
-                                <button class="btn btn-danger text-white mx-2" type="submit">
+                                @can('update', $filtre)                           
+                                    <a class="btn btn-success text-white mx-2" href="/filtres/{{ $filtre->id }}/edit"><i class="fas fa-edit"></i></a>
+                                @endcan
+
+                                @can('delete', $filtre)
+                                    <form action={{ route('filtres.destroy', $filtre->id) }} method="post">
+                                    @csrf
+                                    @method("delete")
+                                    <button class="btn btn-danger text-white mx-2" type="submit">
                                     <i class="fas fa-trash-alt"></i></button>
-                            </form>
+                                    </form>
+                                @endcan
 
                         </div>
                     </td>

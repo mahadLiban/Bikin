@@ -60,6 +60,7 @@ class AboutController extends Controller
      */
     public function edit(About $about)
     {
+        $this->authorize("about-edit", $about);
 
         return view("backoffice.about.edit", compact("about"));
     }
@@ -73,6 +74,8 @@ class AboutController extends Controller
      */
     public function update(Request $request, About $about)
     {
+        $this->authorize("update", $about);
+
         $request->validate([
             
             "logo"=>"required",
@@ -98,6 +101,8 @@ class AboutController extends Controller
      */
     public function destroy(About $about)
     {
+        $this->authorize("delete", $about);
+
         $about->delete();
         return redirect()->back();
     }

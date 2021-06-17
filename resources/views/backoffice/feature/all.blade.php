@@ -36,8 +36,9 @@
                     <td>
                         <div class="d-flex">
                             <a class="btn btn-warning text-white mx-2" href="/features/{{ $feature->id }}"><i class="fas fa-eye"></i></a>
-                                
-                            <a class="btn btn-success text-white mx-2" href="/features/{{ $feature->id }}/edit"><i class="fas fa-edit"></i></a>
+                                @can('update', $feature)                                
+                                <a class="btn btn-success text-white mx-2" href="/features/{{ $feature->id }}/edit"><i class="fas fa-edit"></i></a>
+                                @endcan
                                
                         </div>
                     </td>

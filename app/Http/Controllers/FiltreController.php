@@ -26,6 +26,8 @@ class FiltreController extends Controller
      */
     public function create()
     {
+        $this->authorize("filtre-create", Filtre::class);
+
         $filtres = Filtre::all();
         return view("backoffice.filtre.create", compact("filtres"));
     }
@@ -38,6 +40,8 @@ class FiltreController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize("create", Filtre::class);
+
         $request->validate([
             "nom"
         ]);
@@ -68,6 +72,8 @@ class FiltreController extends Controller
      */
     public function edit(Filtre $filtre)
     {
+        $this->authorize("filtre-edit", $filtre);
+
         return view("backoffice.filtre.edit", compact("filtre"));
 
     }
@@ -81,6 +87,8 @@ class FiltreController extends Controller
      */
     public function update(Request $request, Filtre $filtre)
     {
+        $this->authorize("update", $filtre);
+
         $request->validate([
             "nom"
         ]);
@@ -98,6 +106,8 @@ class FiltreController extends Controller
      */
     public function destroy(Filtre $filtre)
     {
+        $this->authorize("delete", $filtre);
+
         $filtre->delete();
         return redirect()->back();
 

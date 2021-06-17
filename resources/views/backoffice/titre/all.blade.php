@@ -4,8 +4,10 @@
 
     <div class="d-flex align-items-center justify-content-center mb-5">
         <h1 class="my-0 mx-2">titres</h1>
-            
-        <a href={{ route('titres.create') }} class="btn btn-success text-white"><i class="fas fa-plus"></i></a>
+            @can('update',\App\Models\Titre::class)
+                
+            <a href={{ route('titres.create') }} class="btn btn-success text-white"><i class="fas fa-plus"></i></a>
+            @endcan
     </div>
     <table class="table ">
         <thead>
@@ -27,16 +29,19 @@
                         <div class="d-flex">
                             <a class="btn btn-warning  mx-2" href="/titres/{{ $titre->id }}"><i class="fas fa-eye"></i></a>
                            
-                             
-                            <a class="btn btn-success  mx-2" href="/titres/{{ $titre->id }}/edit"><i class="fas fa-edit"></i></a>
+                             @can('update',$titre)
+                                 
+                             <a class="btn btn-success  mx-2" href="/titres/{{ $titre->id }}/edit"><i class="fas fa-edit"></i></a>
+                             @endcan
                             
-                                
-                            <form action={{ route('titres.destroy', $titre->id) }} method="post">
-                                @csrf
-                                @method("delete")
-                                <button class="btn btn-danger  mx-2" type="submit">
-                                    <i class="fas fa-trash-alt"></i></button>
-                            </form>
+                                @can('delete', $titre)
+                                        <form action={{ route('titres.destroy', $titre->id) }} method="post">
+                                            @csrf
+                                            @method("delete")
+                                            <button class="btn btn-danger  mx-2" type="submit">
+                                            <i class="fas fa-trash-alt"></i></button>
+                                        </form>
+                                @endcan
                             
                         </div>
                     </td>

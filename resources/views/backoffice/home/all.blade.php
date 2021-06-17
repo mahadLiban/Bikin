@@ -25,8 +25,10 @@
                     <td>
                         <div class="d-flex">
                             <a class="btn btn-warning text-white mx-2" href="/homes/{{ $home->id }}"><i class="fas fa-eye"></i></a>
-                                
-                            <a class="btn btn-success text-white mx-2" href="/homes/{{ $home->id }}/edit"><i class="fas fa-edit"></i></a>
+                               
+                            @can('update', $home)    
+                                <a class="btn btn-success text-white mx-2" href="/homes/{{ $home->id }}/edit"><i class="fas fa-edit"></i></a>
+                            @endcan
                                
                         </div>
                     </td>
